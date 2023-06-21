@@ -61,6 +61,8 @@ List<BusRoute> sortRoutesByTime(List<BusRoute> routes) {
         orElse: () => Trip(tripStartTime: '', totalSeats: -1, available: -1),
       );
 
+      print(firstUpcomingTrip.tripStartTime);
+
       if (firstUpcomingTrip.tripStartTime.isNotEmpty) {
         route.shortestTripStartTime = firstUpcomingTrip.tripStartTime;
       }
