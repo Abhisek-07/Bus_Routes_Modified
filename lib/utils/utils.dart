@@ -1,5 +1,5 @@
 import 'package:bus_routes_app/models/bus_routes.dart';
-
+import 'package:bus_routes_app/models/trip.dart';
 import 'package:intl/intl.dart';
 
 final timeFormat = DateFormat('HH:mm');
@@ -40,26 +40,44 @@ String getTripEndTime(String tripStartTime, String tripDuration) {
 // sorts the trips of each route (only upcoming trips, i.e, trips after current time) and then sorts
 // the routes based on the shortest remaining time(first entry of upcoming trips) of each route
 
-List<BusRoute> sortRoutesByTime(List<BusRoute> busRoutes) {
-  List<BusRoute> routes = busRoutes;
+List<BusRoute> sortRoutesByTime(List<BusRoute> routes) {
   final deviceTime = timeFormat.format(DateTime.now());
 
   // sorts the trips for each trip (if there are upcoming trips)
   routes.forEach((route) {
+    // resetting each route's shortestTripStartTime so that remainingMinutes does not become negative after last trip of each route because of previously stored value...
+    route.shortestTripStartTime = null;
+
+    // changed trips sorting logic so that trips are aleady sorted and no need of sorting again before displaying in alert dialog... also used routes variable to sort in place
     if (route.trips.isNotEmpty) {
-      final upcomingTrips = route.trips
-          .where((trip) => timeFormat
-              .parse(trip.tripStartTime)
-              .isAfter(timeFormat.parse(deviceTime)))
-          .toList();
+      route.trips.sort(((a, b) => timeFormat
+          .parse(a.tripStartTime)
+          .compareTo(timeFormat.parse(b.tripStartTime))));
 
-      if (upcomingTrips.isNotEmpty) {
-        upcomingTrips.sort((a, b) => timeFormat
-            .parse(a.tripStartTime)
-            .compareTo(timeFormat.parse(b.tripStartTime)));
+      Trip firstUpcomingTrip = route.trips.firstWhere(
+        (trip) => timeFormat
+            .parse(trip.tripStartTime)
+            .isAfter(timeFormat.parse(deviceTime)),
+        orElse: () => Trip(tripStartTime: '', totalSeats: -1, available: -1),
+      );
 
-        route.shortestTripStartTime = upcomingTrips[0].tripStartTime;
+      if (firstUpcomingTrip.tripStartTime.isNotEmpty) {
+        route.shortestTripStartTime = firstUpcomingTrip.tripStartTime;
       }
+
+      // final upcomingTrips = route.trips
+      //     .where((trip) => timeFormat
+      //         .parse(trip.tripStartTime)
+      //         .isAfter(timeFormat.parse(deviceTime)))
+      //     .toList();
+
+      // if (upcomingTrips.isNotEmpty) {
+      //   upcomingTrips.sort((a, b) => timeFormat
+      //       .parse(a.tripStartTime)
+      //       .compareTo(timeFormat.parse(b.tripStartTime)));
+
+      //   route.shortestTripStartTime = upcomingTrips[0].tripStartTime;
+      // }
     }
   });
 

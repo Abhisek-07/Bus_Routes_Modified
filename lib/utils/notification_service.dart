@@ -9,6 +9,8 @@ class NotificationService {
 
   // initializes notification settings
   static Future<void> init() async {
+    permissionGranted = await requestNotificationPermission();
+
     const initializationSettingsAndroid =
         AndroidInitializationSettings('@mipmap/ic_launcher');
 
@@ -22,8 +24,6 @@ class NotificationService {
     await flutterLocalNotificationsPlugin.initialize(
       initializationSettings,
     );
-
-    permissionGranted = await requestNotificationPermission();
   }
 
   // For handling notification permissions
@@ -36,7 +36,7 @@ class NotificationService {
   }
 
   // For showing notification
-  static Future<void> showNotification() async {
+  static Future<void> showNotification(String route, int remainingTime) async {
     // final permissionGranted = await requestNotificationPermission();
 
     if (!permissionGranted) {
@@ -65,7 +65,7 @@ class NotificationService {
     await flutterLocalNotificationsPlugin.show(
       0,
       'Bus Reminder',
-      'Your bus will arrive in 5 minutes!',
+      'Next bus on route $route will arrive in $remainingTime minutes!',
       platformChannelSpecifics,
     );
   }
