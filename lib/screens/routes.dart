@@ -18,6 +18,18 @@ class RoutesScreen extends ConsumerWidget {
           SizedBox(
             height: 200,
             child: AppBar(
+              flexibleSpace: Container(
+                decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                  colors: [
+                    Theme.of(context).colorScheme.primary,
+                    Theme.of(context).colorScheme.inversePrimary,
+                    Theme.of(context).colorScheme.primaryContainer,
+                  ],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                )),
+              ),
               centerTitle: true,
               title: const Text('Routes'),
             ),
