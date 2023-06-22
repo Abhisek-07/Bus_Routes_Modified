@@ -12,17 +12,16 @@ class RouteAlertDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
+      backgroundColor: Theme.of(context).colorScheme.background,
       title: Text(
         'Bus Timings: ${route.name}',
         style: TextStyle(color: Theme.of(context).colorScheme.primary),
       ),
-      content: SizedBox(
-        width: 200,
-        height: 175,
-        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          Expanded(
-            child: Column(
+      content: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -42,9 +41,12 @@ class RouteAlertDialog extends StatelessWidget {
                               Padding(
                                 padding: const EdgeInsets.only(bottom: 14),
                                 child: Container(
-                                  color: Theme.of(context)
-                                      .colorScheme
-                                      .inverseSurface,
+                                  decoration: BoxDecoration(
+                                      color: Theme.of(context).primaryColor,
+                                      border: Border.all(
+                                          color:
+                                              Theme.of(context).primaryColor),
+                                      borderRadius: BorderRadius.circular(8)),
                                   padding: const EdgeInsets.all(2),
                                   child: Text(
                                     trip.tripStartTime,
@@ -73,16 +75,19 @@ class RouteAlertDialog extends StatelessWidget {
                               Padding(
                                 padding: const EdgeInsets.only(bottom: 14),
                                 child: Container(
-                                  color: Theme.of(context)
-                                      .colorScheme
-                                      .inverseSurface,
+                                  decoration: BoxDecoration(
+                                      color: Theme.of(context).primaryColor,
+                                      border: Border.all(
+                                          color:
+                                              Theme.of(context).primaryColor),
+                                      borderRadius: BorderRadius.circular(8)),
                                   padding: const EdgeInsets.all(2),
                                   child: Text(
                                     trip.tripStartTime,
                                     style: const TextStyle(
                                         fontSize: 16,
                                         fontWeight: FontWeight.bold,
-                                        color: Colors.grey),
+                                        color: Colors.red),
                                   ),
                                 ),
                               ),
@@ -93,51 +98,49 @@ class RouteAlertDialog extends StatelessWidget {
                                 'Departed',
                                 style: TextStyle(
                                     fontSize: 16,
-                                    color: Colors.grey,
+                                    color: Colors.red,
                                     fontWeight: FontWeight.bold),
                               ),
                             ],
                           )
               ],
             ),
-          ),
-          const SizedBox(height: 16),
-          const Text(
-            'Legend:',
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
+            const SizedBox(height: 16),
+            const Text(
+              'Legend:',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+              ),
             ),
-          ),
-          const SizedBox(height: 12),
-          const Row(
-            children: [
-              Row(
-                children: [
-                  Icon(
-                    Icons.circle,
-                    color: Colors.green, // Upcoming time color
-                    size: 16,
-                  ),
-                  SizedBox(width: 8),
-                  Text('Upcoming Trips'),
-                ],
-              ),
-              SizedBox(width: 12),
-              Row(
-                children: [
-                  Icon(
-                    Icons.circle,
-                    color: Colors.grey, // Past time color
-                    size: 16,
-                  ),
-                  SizedBox(width: 8),
-                  Text('Past Trips'),
-                ],
-              ),
-            ],
-          ),
-        ]),
-      ),
+            const SizedBox(height: 12),
+            const Row(
+              children: [
+                Row(
+                  children: [
+                    Icon(
+                      Icons.circle,
+                      color: Colors.green, // Upcoming time color
+                      size: 16,
+                    ),
+                    SizedBox(width: 8),
+                    Text('Upcoming Trips'),
+                  ],
+                ),
+                SizedBox(width: 12),
+                Row(
+                  children: [
+                    Icon(
+                      Icons.circle,
+                      color: Colors.red, // Past time color
+                      size: 16,
+                    ),
+                    SizedBox(width: 8),
+                    Text('Past Trips'),
+                  ],
+                ),
+              ],
+            ),
+          ]),
       actions: [
         TextButton(
           onPressed: () {
