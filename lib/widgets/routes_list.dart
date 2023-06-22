@@ -68,8 +68,8 @@ class _RoutesListState extends State<RoutesList> {
     super.initState();
     updateData();
     startTimer();
-    configureWorkManager();
     initializeNotifications();
+    configureWorkManager();
   }
 
   void initializeNotifications() async {
@@ -77,8 +77,8 @@ class _RoutesListState extends State<RoutesList> {
   }
 
   // for configuring the work manager
-  void configureWorkManager() {
-    workmanager.initialize(
+  void configureWorkManager() async {
+    await workmanager.initialize(
       callbackDispatcher,
       isInDebugMode: true,
     );
