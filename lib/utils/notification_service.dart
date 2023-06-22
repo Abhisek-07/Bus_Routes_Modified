@@ -2,13 +2,13 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class NotificationService {
-  static final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+  final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
       FlutterLocalNotificationsPlugin();
 
-  static late bool permissionGranted;
+  late bool permissionGranted;
 
   // initializes notification settings
-  static Future<void> init() async {
+  Future<void> init() async {
     permissionGranted = await requestNotificationPermission();
 
     const initializationSettingsAndroid =
@@ -27,7 +27,7 @@ class NotificationService {
   }
 
   // For handling notification permissions
-  static Future<bool> requestNotificationPermission() async {
+  Future<bool> requestNotificationPermission() async {
     PermissionStatus status = await Permission.notification.status;
     if (!status.isGranted) {
       status = await Permission.notification.request();
@@ -36,7 +36,7 @@ class NotificationService {
   }
 
   // For showing notification
-  static Future<void> showNotification(String route, int remainingTime) async {
+  Future<void> showNotification(String route, int remainingTime) async {
     // final permissionGranted = await requestNotificationPermission();
 
     if (!permissionGranted) {

@@ -32,9 +32,9 @@ void callbackDispatcher() {
           sortedRoutes[0].shortestTripStartTime != null) {
         final remainingTime =
             getRemainingTimeInMinutes(sortedRoutes[0].shortestTripStartTime!);
-
-        await NotificationService.init();
-        NotificationService.showNotification(
+        NotificationService notificationService = NotificationService();
+        await notificationService.init();
+        notificationService.showNotification(
             sortedRoutes[0].name, remainingTime);
       }
 
@@ -56,8 +56,11 @@ class RoutesList extends StatefulWidget {
 }
 
 class _RoutesListState extends State<RoutesList> {
-  Timer? timer;
   // List<BusRoute> sortedRoutes = [];
+
+  Timer? timer;
+
+  NotificationService notificationService = NotificationService();
 
   bool isLoading = false;
 
@@ -75,7 +78,7 @@ class _RoutesListState extends State<RoutesList> {
   }
 
   void initializeNotifications() async {
-    await NotificationService.init();
+    await notificationService.init();
   }
 
   // for configuring the work manager
@@ -110,12 +113,13 @@ class _RoutesListState extends State<RoutesList> {
         sortedRoutes);
 
     // logic for showing notifications when 5 minutes till next bus
-    if (sortedRoutes[0].shortestTripStartTime != null) {
+    if (sortedRoutes.isNotEmpty &&
+        sortedRoutes[0].shortestTripStartTime != null) {
       final remainingTime =
           getRemainingTimeInMinutes(sortedRoutes[0].shortestTripStartTime!);
 
       if (remainingTime == 5) {
-        NotificationService.showNotification(
+        notificationService.showNotification(
             sortedRoutes[0].name, remainingTime);
       }
     }

@@ -34,21 +34,70 @@ class RouteAlertDialog extends StatelessWidget {
                   )
                 else
                   for (var trip in route.trips)
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 16),
-                      child: Text(trip.tripStartTime,
-                          style: timeFormat.parse(trip.tripStartTime).isAfter(
-                                  timeFormat
-                                      .parse(timeFormat.format(DateTime.now())))
-                              ? const TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.green)
-                              : const TextStyle(
-                                  fontSize: 16,
-                                  color: Colors.grey,
-                                )),
-                    ),
+                    timeFormat.parse(trip.tripStartTime).isAfter(
+                            timeFormat.parse(timeFormat.format(DateTime.now())))
+                        ? Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(bottom: 14),
+                                child: Container(
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .inverseSurface,
+                                  padding: const EdgeInsets.all(2),
+                                  child: Text(
+                                    trip.tripStartTime,
+                                    style: const TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.green),
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(
+                                width: 12,
+                              ),
+                              const Text(
+                                'Arriving',
+                                style: TextStyle(
+                                    fontSize: 16,
+                                    color: Colors.green,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ],
+                          )
+                        : Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(bottom: 14),
+                                child: Container(
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .inverseSurface,
+                                  padding: const EdgeInsets.all(2),
+                                  child: Text(
+                                    trip.tripStartTime,
+                                    style: const TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.grey),
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(
+                                width: 12,
+                              ),
+                              const Text(
+                                'Departed',
+                                style: TextStyle(
+                                    fontSize: 16,
+                                    color: Colors.grey,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ],
+                          )
               ],
             ),
           ),

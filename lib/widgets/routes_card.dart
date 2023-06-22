@@ -100,7 +100,7 @@ class RouteCard extends StatelessWidget {
                             mainAxisSize: MainAxisSize.min,
                             children: [
                               const Text(
-                                'Departure in:',
+                                'Next Bus in:',
                                 style: TextStyle(
                                   fontSize: 20,
                                 ),
