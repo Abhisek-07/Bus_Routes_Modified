@@ -1,12 +1,10 @@
 import 'package:bus_routes_app/screens/splash_screen.dart';
-// import 'package:bus_routes_app/utils/notification_service.dart';
 import 'package:bus_routes_app/utils/themes.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // await NotificationService.init();
   runApp(const ProviderScope(child: MyApp()));
 }
 

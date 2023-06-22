@@ -2,7 +2,6 @@ import 'package:bus_routes_app/models/bus_routes.dart';
 import 'package:bus_routes_app/service/api_service.dart';
 import 'package:bus_routes_app/widgets/routes_list.dart';
 import 'package:flutter/material.dart';
-// import 'package:bus_routes/service/api_service.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class RoutesScreen extends ConsumerWidget {

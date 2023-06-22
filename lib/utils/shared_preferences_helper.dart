@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:bus_routes_app/models/bus_routes.dart';
-// import 'package:bus_routes_app/models/trip.dart';
 
 class SharedPreferencesHelper {
   static Future<void> saveSortedRoutesToSharedPreferences(
@@ -30,21 +29,6 @@ class SharedPreferencesHelper {
         List<dynamic> tripListJson = json['trips'];
 
         return BusRoute.fromJson(json, tripListJson);
-
-        // List<Trip> trips = tripListJson.map((tripJson) {
-        //   return Trip.fromJson(tripJson);
-        // }).toList();
-
-        // Create a BusRoute object from each JSON object in the list
-        // return BusRoute(
-        //   id: json['id'],
-        //   name: json['name'],
-        //   source: json['source'],
-        //   destination: json['destination'],
-        //   tripDuration: json['tripDuration'],
-        //   icon: json['icon'],
-        //   trips: trips, // Populate the trips list if needed
-        // );
       }).toList();
 
       return sortedRoutes;

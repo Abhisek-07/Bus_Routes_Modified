@@ -3,12 +3,10 @@ import 'dart:async';
 import 'package:bus_routes_app/models/bus_routes.dart';
 import 'package:bus_routes_app/utils/notification_service.dart';
 import 'package:bus_routes_app/widgets/routes_card.dart';
-// import 'package:bus_routes_app/widgets/route_alert_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:workmanager/workmanager.dart';
-// import 'package:flutter_riverpod/flutter_riverpod.dart';
-// import 'package:bus_routes/service/api_service.dart';
+
 import 'package:bus_routes_app/utils/utils.dart';
 import 'package:bus_routes_app/utils/shared_preferences_helper.dart';
 
@@ -172,16 +170,10 @@ class _RoutesListState extends State<RoutesList> {
               tripEndTime = getTripEndTime(
                   route.shortestTripStartTime!, route.tripDuration);
 
-              // if (remainingTime <= 0) {
-              //   return Container();
-              // }
+              // removed check if remainingTime <= 0, as it is handled in sortRoutesByTime by setting route.shortestTripStartTime to null for every route at first(maybe changed later in same method) on every call to sortRoutesByTime
             }
 
-            // route.trips.sort(
-            //   (a, b) => timeFormat
-            //       .parse(a.tripStartTime)
-            //       .compareTo(timeFormat.parse(b.tripStartTime)),
-            // );
+            // removed sorting logic fro trips from here, as they are sorted in sortRoutesByTime method itself (routes as well as their trips)
 
             // widget for route card
             return RouteCard(

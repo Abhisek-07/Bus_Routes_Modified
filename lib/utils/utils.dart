@@ -66,20 +66,6 @@ List<BusRoute> sortRoutesByTime(List<BusRoute> routes) {
       if (firstUpcomingTrip.tripStartTime.isNotEmpty) {
         route.shortestTripStartTime = firstUpcomingTrip.tripStartTime;
       }
-
-      // final upcomingTrips = route.trips
-      //     .where((trip) => timeFormat
-      //         .parse(trip.tripStartTime)
-      //         .isAfter(timeFormat.parse(deviceTime)))
-      //     .toList();
-
-      // if (upcomingTrips.isNotEmpty) {
-      //   upcomingTrips.sort((a, b) => timeFormat
-      //       .parse(a.tripStartTime)
-      //       .compareTo(timeFormat.parse(b.tripStartTime)));
-
-      //   route.shortestTripStartTime = upcomingTrips[0].tripStartTime;
-      // }
     }
   });
 
