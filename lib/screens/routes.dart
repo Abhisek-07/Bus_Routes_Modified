@@ -7,8 +7,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 class RoutesScreen extends ConsumerWidget {
   const RoutesScreen({super.key});
 
-  // final apiService = ApiService();
-
   // Here we get the http request data using a future builder and handle its states & pass the data to routes list
   @override
   Widget build(BuildContext context, WidgetRef ref) {

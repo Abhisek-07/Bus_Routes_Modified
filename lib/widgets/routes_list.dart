@@ -51,8 +51,6 @@ class RoutesList extends StatefulWidget {
 }
 
 class _RoutesListState extends State<RoutesList> {
-  // List<BusRoute> sortedRoutes = [];
-
   Timer? timer;
 
   NotificationService notificationService = NotificationService();
@@ -62,7 +60,7 @@ class _RoutesListState extends State<RoutesList> {
   final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey =
       GlobalKey<RefreshIndicatorState>();
 
-  // timer is initialised inside initstate and first call to updateData to sort the routes
+  // timer is initialised inside initstate and first call to updateData to sort the routes, notifications and work manager are also initialized
   @override
   void initState() {
     super.initState();
