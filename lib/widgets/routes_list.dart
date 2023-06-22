@@ -21,9 +21,6 @@ final timeFormat = DateFormat('HH:mm');
 void callbackDispatcher() {
   workmanager.executeTask((task, inputData) async {
     if (task == "sortRoutesTask") {
-      // final container = ProviderContainer();
-      // var routesList = await container.read(routesProvider.future);
-
       sortedRoutes =
           await SharedPreferencesHelper.getSortedRoutesFromSharedPreferences();
       sortedRoutes = sortRoutesByTime(sortedRoutes);
