@@ -56,7 +56,8 @@ class _RouteAlertDialogState extends State<RouteAlertDialog>
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   if (widget.route.trips.isEmpty)
-                    const Expanded(
+                    const SizedBox(
+                      height: 120,
                       child: Center(
                         child: Text('No trips'),
                       ),

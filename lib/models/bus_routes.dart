@@ -20,6 +20,25 @@ class BusRoute {
   List<Trip> trips;
   String? shortestTripStartTime;
 
+  factory BusRoute.fromJson(
+      Map<String, dynamic> routeInfo, List<dynamic> routeTimings) {
+    List<Trip> trips = routeTimings.map(
+      (trip) {
+        return Trip.fromJson(trip);
+      },
+    ).toList();
+
+    return BusRoute(
+      id: routeInfo['id'],
+      name: routeInfo['name'],
+      source: routeInfo['source'],
+      destination: routeInfo['destination'],
+      tripDuration: routeInfo['tripDuration'],
+      icon: routeInfo['icon'],
+      trips: trips,
+    );
+  }
+
   Map<String, dynamic> toJson() {
     return {
       'id': id,

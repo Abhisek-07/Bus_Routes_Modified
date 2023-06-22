@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:bus_routes_app/models/trip.dart';
+// import 'package:bus_routes_app/models/trip.dart';
 
 import 'package:bus_routes_app/models/bus_routes.dart';
 
@@ -25,32 +25,38 @@ class ApiService {
     List<BusRoute> busRoutes = busRoutesInfo.map(
       (busInfo) {
         String id = busInfo['id'];
-        String name = busInfo['name'];
-        String source = busInfo['source'];
-        String destination = busInfo['destination'];
-        String tripDuration = busInfo['tripDuration'];
-        String icon = busInfo['icon'];
 
         // list of bus route trips for each bus route
         List<dynamic> busRouteTimings = busData['routeTimings'][id];
 
-        List<Trip> trips = busRouteTimings.map(
-          (trip) {
-            return Trip.fromJson(trip);
-          },
-        ).toList();
+        return BusRoute.fromJson(busInfo, busRouteTimings);
 
-        BusRoute busRoute = BusRoute(
-          id: id,
-          name: name,
-          source: source,
-          destination: destination,
-          tripDuration: tripDuration,
-          icon: icon,
-          trips: trips,
-        );
+        // String name = busInfo['name'];
+        // String source = busInfo['source'];
+        // String destination = busInfo['destination'];
+        // String tripDuration = busInfo['tripDuration'];
+        // String icon = busInfo['icon'];
 
-        return busRoute;
+        // // list of bus route trips for each bus route
+        // List<dynamic> busRouteTimings = busData['routeTimings'][id];
+
+        // List<Trip> trips = busRouteTimings.map(
+        //   (trip) {
+        //     return Trip.fromJson(trip);
+        //   },
+        // ).toList();
+
+        // BusRoute busRoute = BusRoute(
+        //   id: id,
+        //   name: name,
+        //   source: source,
+        //   destination: destination,
+        //   tripDuration: tripDuration,
+        //   icon: icon,
+        //   trips: trips,
+        // );
+
+        // return busRoute;
       },
     ).toList();
 
