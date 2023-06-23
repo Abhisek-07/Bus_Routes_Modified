@@ -42,8 +42,10 @@ void callbackDispatcher() {
 }
 
 class RoutesList extends StatefulWidget {
-  const RoutesList({super.key, required this.busRoutes});
+  const RoutesList(
+      {super.key, required this.busRoutes, required this.scrollerController});
 
+  final ScrollController scrollerController;
   final List<BusRoute> busRoutes;
 
   @override
@@ -155,6 +157,7 @@ class _RoutesListState extends State<RoutesList> {
       key: _refreshIndicatorKey,
       onRefresh: _refreshList,
       child: ListView.builder(
+          controller: widget.scrollerController,
           itemCount: sortedRoutes.length,
           itemBuilder: (context, index) {
             final route = sortedRoutes[index];
